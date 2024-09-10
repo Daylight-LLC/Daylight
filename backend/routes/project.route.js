@@ -9,6 +9,7 @@ import {
 
 const router = express.Router();
 
+//project routes
 router.post("/", addProject);
 router.get("/", getProjects);
 router.delete("/:id", deleteProject);
