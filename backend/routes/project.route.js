@@ -1,4 +1,5 @@
 import express from "express";
+import rateLimit from "express-rate-limit";
 
 import {
   addProject,
@@ -9,10 +10,16 @@ import {
 
 const router = express.Router();
 
+const rateLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000, // 1 hour
+  max: 100, // limit each IP to 100 requests per windowMs
+  message: "Too many requests from this IP, please try again later.",
+});
+
 //project routes
-router.post("/", addProject);
-router.get("/", getProjects);
-router.delete("/:id", deleteProject);
-router.put("/:id", updateProject);
+router.post("/", rateLimiter, addProject);
+router.get("/", rateLimiter, getProjects);
+router.delete("/:id", rateLimiter, deleteProject);
+router.put("/:id", rateLimiter, updateProject);
 
 export default router;
