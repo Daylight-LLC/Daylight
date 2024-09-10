@@ -1,12 +1,6 @@
 import express from "express";
+import { addTeam } from "../controllers/team.controller.js";
 import rateLimit from "express-rate-limit";
-
-import {
-  addProject,
-  getProjects,
-  deleteProject,
-  updateProject,
-} from "../controllers/project.controller.js";
 
 const router = express.Router();
 
@@ -16,10 +10,6 @@ const rateLimiter = rateLimit({
   message: "Too many requests from this IP, please try again later.",
 });
 
-//project routes
-router.post("/", rateLimiter, addProject);
-router.get("/", rateLimiter, getProjects);
-router.delete("/:id", rateLimiter, deleteProject);
-router.put("/:id", rateLimiter, updateProject);
+router.post("/:projectId/teams", rateLimiter, addTeam);
 
 export default router;
