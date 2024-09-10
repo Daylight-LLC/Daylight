@@ -23,3 +23,56 @@ export const addProject = async (req, res) => {
     res.status(500).json({ success: false, message: "Server Error" });
   }
 };
+
+export const getProjects = async (req, res) => {
+  try {
+    const projects = await Project.find({});
+    res.status(200).json({
+      success: true,
+      data: projects,
+    });
+  } catch (error) {
+    console.error("Error in fetching projects");
+    res.status(500).json({
+      success: false,
+      message: "Server Error",
+    });
+  }
+};
+
+export const deleteProject = async (req, res) => {
+  const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res
+      .status(404)
+      .json({ success: false, message: "Invalid project ID" });
+  }
+  try {
+    await Project.findByIdAndDelete(id);
+    res.status(200).json({ success: true, message: "Project deleted" });
+  } catch (error) {
+    console.error("Error in deleting project", error.message);
+    res.status(500).json({ success: false, message: "Server Error" });
+  }
+};
+
+export const updateProject = async (req, res) => {
+  const { id } = req.params;
+  const project = req.body;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({
+      success: false,
+      message: "Invalid project ID",
+    });
+  }
+
+  try {
+    const updatedProject = await Project.findByIdAndUpdate(id, project, {
+      new: true,
+    });
+    res.status(200).json({ success: true, data: updatedProject });
+  } catch (error) {
+    res.status(500).json({ success: false, message: "Server Error." });
+  }
+};
