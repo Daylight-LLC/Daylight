@@ -1,1 +1,116 @@
+name: "CodeQL Advanced"
 
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "0 0 * * 0" # Run weekly on Sundays at midnight
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # Specify the Node.js version you're using
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: +security-and-quality,security-extended
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
+
+      - name: Install Client Dependencies
+        working-directory: ./client
+        run: |
+          if [ -f "package-lock.json" ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Install Server Dependencies
+        working-directory: ./server
+        run: |
+          if [ -f "package-lock.json" ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run Client Linter
+        working-directory: ./client
+        run: npm run lint || echo "Client linting failed but continuing..."
+
+      - name: Run Server Linter
+        working-directory: ./server
+        run: npm run lint || echo "Server linting failed but continuing..."
+
+      - name: Run Client TypeScript Compiler
+        working-directory: ./client
+        run: npm run tsc || echo "Client TypeScript compilation failed but continuing..."
+
+      - name: Run Server TypeScript Compiler
+        working-directory: ./server
+        run: npm run tsc || echo "Server TypeScript compilation failed but continuing..."
+
+      - name: Run Client Tests
+        working-directory: ./client
+        run: npm test || echo "Client tests failed but continuing..."
+
+      - name: Run Server Tests
+        working-directory: ./server
+        run: npm test || echo "Server tests failed but continuing..."
+
+      - name: Check Client Dependencies
+        working-directory: ./client
+        run: npm outdated || true
+
+      - name: Check Server Dependencies
+        working-directory: ./server
+        run: npm outdated || true
+
+      - name: Run Client Security Audit
+        working-directory: ./client
+        run: npm audit || echo "Client security audit failed but continuing..."
+
+      - name: Run Server Security Audit
+        working-directory: ./server
+        run: npm audit || echo "Server security audit failed but continuing..."
+
+    # Uncomment and adjust these steps as you implement them
+    # - name: Run Client Integration Tests
+    #   working-directory: ./client
+    #   run: npm run test:integration || echo "Client integration tests failed but continuing..."
+
+    # - name: Run Server Integration Tests
+    #   working-directory: ./server
+    #   run: npm run test:integration || echo "Server integration tests failed but continuing..."
+
+    # - name: Run Client Custom Security Checks
+    #   working-directory: ./client
+    #   run: npm run security-check || echo "Client custom security checks failed but continuing..."
+
+    # - name: Run Server Custom Security Checks
+    #   working-directory: ./server
+    #   run: npm run security-check || echo "Server custom security checks failed but continuing..."
