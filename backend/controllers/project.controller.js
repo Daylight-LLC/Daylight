@@ -67,7 +67,6 @@ export const updateProject = async (req, res) => {
     });
   }
 
-  // Validate project fields (add additional validation as needed)
   if (!project.name || !project.description) {
     return res.status(400).json({
       success: false,
@@ -78,7 +77,7 @@ export const updateProject = async (req, res) => {
   try {
     const updatedProject = await Project.findByIdAndUpdate(id, project, {
       new: true,
-      runValidators: true, // Validate data against the schema before saving
+      runValidators: true,
     });
     if (!updatedProject) {
       return res
