@@ -13,4 +13,6 @@ const teamMemberSchema = new mongoose.Schema({
   assignedIssues: [issueSchema], // Each team member has an array of assigned issues
 });
 
+const TeamMember = mongoose.model("TeamMember", teamMemberSchema);
+
 export default teamMemberSchema;
