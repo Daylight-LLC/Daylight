@@ -1,5 +1,7 @@
 import React from 'react';
 import StatsCard from '../components/StatsCard';
+import MeetingCard from '../components/MeetingCard';
+
 
 
 const Dashboard: React.FC = () => {
@@ -15,15 +17,15 @@ const Dashboard: React.FC = () => {
 
   getProjects()
   return (
-    <div className="p-2 min-h-screen">
+    <div className="p-2 ">
         <div className="flex">
-          <div className="w-3/4">
+          <div className="w-3/4"> 
             <h2 className="text-2xl font-semibold">Your Dashboard</h2>
             <StatsCard/>
           </div>
 
-          <div className="w-1/4 bg-gray-100 p-4 ">
-            <h2 className="text-2xl font-bold">Right Content</h2>
+          <div className="w-1/4 p-4 ">
+            <MeetingCard/>
           </div>
         </div>
     </div>
