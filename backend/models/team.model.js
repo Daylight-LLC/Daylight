@@ -12,6 +12,4 @@ const teamSchema = new mongoose.Schema({
   members: [teamMemberSchema], // Each team has an array of members
 });
 
-const Team = mongoose.model("Team", teamSchema);
-
 export default teamSchema;
