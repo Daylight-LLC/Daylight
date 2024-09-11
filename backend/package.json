@@ -5,7 +5,7 @@
   "type": "module",
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.20.0",
+    "express": "^5.0.0",
     "express-rate-limit": "^7.4.0",
     "mongodb": "^6.8.1",
     "mongoose": "^8.6.1",
