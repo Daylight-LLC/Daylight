@@ -6,11 +6,12 @@ export const addTeam = async (req, res) => {
   const { projectId } = req.params;
   const { teamName, members } = req.body;
 
-  if (!mongoose.Types.ObjectId.isValid(projectId)) {
+  if (!mongoose.isValidObjectId(projectId)) {
     return res
-      .status(404)
+      .status(400)
       .json({ success: false, message: "Invalid Project ID" });
   }
+
   if (!teamName || !members || members.length === 0) {
     return res.status(400).json({
       success: false,

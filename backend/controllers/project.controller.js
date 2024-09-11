@@ -67,12 +67,27 @@ export const updateProject = async (req, res) => {
     });
   }
 
+  // Validate project fields (add additional validation as needed)
+  if (!project.name || !project.description) {
+    return res.status(400).json({
+      success: false,
+      message: "Please provide all required fields",
+    });
+  }
+
   try {
     const updatedProject = await Project.findByIdAndUpdate(id, project, {
       new: true,
+      runValidators: true, // Validate data against the schema before saving
     });
+    if (!updatedProject) {
+      return res
+        .status(404)
+        .json({ success: false, message: "Project not found" });
+    }
     res.status(200).json({ success: true, data: updatedProject });
   } catch (error) {
-    res.status(500).json({ success: false, message: "Server Error." });
+    console.error("Error in updating project", error.message);
+    res.status(500).json({ success: false, message: "Server Error" });
   }
 };
