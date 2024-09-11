@@ -10,7 +10,7 @@ const issueSchema = new mongoose.Schema({
     enum: ["open", "in progress", "closed"],
     default: "open",
   },
-  githubIssueLink: String, // Optional: store a GitHub issue link or other relevant info
+  githubIssueLink: String,
   createdAt: {
     type: Date,
     default: Date.now,
