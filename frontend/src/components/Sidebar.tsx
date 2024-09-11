@@ -4,68 +4,40 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import PeopleIcon from '@mui/icons-material/People';
 import FolderIcon from '@mui/icons-material/Folder';
 import ReportProblemIcon from '@mui/icons-material/ReportProblem';
-import LoginIcon from '@mui/icons-material/Login';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
-const Sidebar: React.FC = () => {
+const menuItems = [
+  { to: '/app/dashboard', icon: <DashboardIcon />, label: 'Dashboard' },
+  { to: '/app/teams', icon: <PeopleIcon />, label: 'Teams' },
+  { to: '/app/projects', icon: <FolderIcon />, label: 'Projects' },
+  { to: '/app/issues', icon: <ReportProblemIcon />, label: 'Issues' },
+];
+
+const Sidebar: React.FC<{ isOnlyIcon: boolean }> = ({ isOnlyIcon }) => {
   return (
-    <aside className="w-64 bg-blue-500 text-white h-screen p-6">
-      <nav>
-        <ul className="space-y-4">
-          <li>
-            <Link 
-              to="/" 
-              className="flex items-center p-2 rounded-md hover:bg-blue-400 transition-colors"
-            >
-              <DashboardIcon className="text-lg" />
-              <span className="ml-4">Dashboard</span>
-            </Link>
-          </li>
-          <li>
-            <Link 
-              to="/teams" 
-              className="flex items-center p-2 rounded-md hover:bg-blue-400 transition-colors"
-            >
-              <PeopleIcon className="text-lg" />
-              <span className="ml-4">Teams</span>
-            </Link>
-          </li>
-          <li>
-            <Link 
-              to="/projects" 
-              className="flex items-center p-2 rounded-md hover:bg-blue-400 transition-colors"
-            >
-              <FolderIcon className="text-lg" />
-              <span className="ml-4">Projects</span>
-            </Link>
-          </li>
-          <li>
-            <Link 
-              to="/issues" 
-              className="flex items-center p-2 rounded-md hover:bg-blue-400 transition-colors"
-            >
-              <ReportProblemIcon className="text-lg" />
-              <span className="ml-4">Issues</span>
-            </Link>
-          </li>
-          <li>
-            <Link 
-              to="/login" 
-              className="flex items-center p-2 rounded-md hover:bg-blue-400 transition-colors"
-            >
-              <LoginIcon className="text-lg" />
-              <span className="ml-4">Login</span>
-            </Link>
-          </li>
-          <li>
-            <Link 
-              to="/signup" 
-              className="flex items-center p-2 rounded-md hover:bg-blue-400 transition-colors"
-            >
-              <PersonAddIcon className="text-lg" />
-              <span className="ml-4">Signup</span>
-            </Link>
-          </li>
+    <aside className={` bg-blue-500 text-white h-screen p-1 ${isOnlyIcon ? 'w-16' : 'w-56'}`}>
+      <div className='py-3'>
+        <div className="text-xl font-bold pb-3 flex justify-center">
+          { !isOnlyIcon ? 
+              <Link to="/app/dashboard" className="hover:text-blue-400">ProjectPulse</Link> : 
+              <Link to="/app/dashboard" className="hover:text-blue-400" >P</Link>
+          }
+        </div>
+        <hr />
+      </div>
+      
+      <nav className='pt-8'>
+        <ul className="space-y-3">
+          {menuItems.map((item, index) => (
+            <li key={index}>
+              <Link 
+                to={item.to} 
+                className={`flex items-center p-3 rounded-md hover:bg-blue-400 transition-colors ${isOnlyIcon ? 'justify-center' : ''}`}
+              >
+                {item.icon}
+                {!isOnlyIcon && <span className="ml-4">{item.label}</span>}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </aside>
