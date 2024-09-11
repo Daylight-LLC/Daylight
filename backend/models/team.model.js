@@ -5,6 +5,10 @@ const teamSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  teamLeadName: {
+    type: String,
+    required: true,
+  },
   members: [teamMemberSchema], // Each team has an array of members
 });
 
