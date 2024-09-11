@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 import Project from "../models/project.model.js";
-import { Team } from "../models/team.model.js";
 
 export const addTeam = async (req, res) => {
   const { projectId } = req.params;
