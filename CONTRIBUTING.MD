@@ -4,7 +4,7 @@ First off, thank you for considering contributing to Remote Team Performance Ana
 
 ## Code of Conduct
 
-By participating in this project, you are expected to uphold our Code of Conduct. Please report unacceptable behavior to [project_email@example.com].
+By participating in this project, you are expected to uphold our Code of Conduct.
 
 ## How Can I Contribute?
 
@@ -58,9 +58,9 @@ All JavaScript must adhere to [JavaScript Standard Style](https://standardjs.com
 
 - Use [Markdown](https://daringfireball.net/projects/markdown).
 - Reference methods and classes in markdown with the custom `{}` notation:
-    - Reference classes with `{ClassName}`.
-    - Reference instance methods with `{ClassName::methodName}`.
-    - Reference class methods with `{ClassName.methodName}`.
+  - Reference classes with `{ClassName}`.
+  - Reference instance methods with `{ClassName::methodName}`.
+  - Reference class methods with `{ClassName.methodName}`.
 
 ## Additional Notes
 
@@ -68,10 +68,10 @@ All JavaScript must adhere to [JavaScript Standard Style](https://standardjs.com
 
 This section lists the labels we use to help us track and manage issues and pull requests.
 
-* `bug` - Issues that are bugs.
-* `enhancement` - Issues that are feature requests.
-* `documentation` - Issues or pull requests related to documentation.
-* `good first issue` - Good for newcomers.
+- `bug` - Issues that are bugs.
+- `enhancement` - Issues that are feature requests.
+- `documentation` - Issues or pull requests related to documentation.
+- `good first issue` - Good for newcomers.
 
 ## Getting Started
 
@@ -80,21 +80,22 @@ For contributions larger than a one or two-line fix:
 1. Create your own fork of the code.
 2. Make changes in your fork.
 3. If you like the change and think the project could use it:
-    * Ensure the code style matches the project’s guidelines.
-    * Submit a pull request.
+   - Ensure the code style matches the project’s guidelines.
+   - Submit a pull request.
 
 Small contributions, such as fixing spelling errors, can be submitted by contributors as a patch without the need for a formal pull request.
 
 ### Obvious Fixes
 
 Obvious fixes are minor contributions that do not introduce any new functionality or creative thinking. Examples include:
-* Spelling / grammar fixes.
-* Typo correction, white space and formatting changes.
-* Comment clean up.
-* Bug fixes that adjust return values or error codes stored in constants.
-* Adding logging messages or debugging output.
-* Metadata changes like `.gitignore` or build scripts.
-* Moving source files between directories or packages.
+
+- Spelling / grammar fixes.
+- Typo correction, white space and formatting changes.
+- Comment clean up.
+- Bug fixes that adjust return values or error codes stored in constants.
+- Adding logging messages or debugging output.
+- Metadata changes like `.gitignore` or build scripts.
+- Moving source files between directories or packages.
 
 ## Attribution
 
@@ -109,8 +110,6 @@ This Contributing Guide is adapted from the open-source contribution guidelines 
 
 - [ ] I have read the contributing guidelines.
 - [ ] I have followed the TypeScript/JavaScript style guides.
-- [ ] I have added or updated tests to cover my changes.
-- [ ] I have added documentation where necessary.
 - [ ] All new and existing tests passed.
 
 ## Description
@@ -128,3 +127,4 @@ This Contributing Guide is adapted from the open-source contribution guidelines 
 ## Additional Notes
 
 (Anything else you'd like to mention about this pull request?)
+```
