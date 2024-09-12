@@ -8,16 +8,6 @@ import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined
 
 const Dashboard: React.FC = () => {
 
-  // async function getProjects() {
-  //   try{
-  //     const response = await fetch('http://localhost:5001/api/project')
-  //     console.log(response.json()) 
-  //   } catch{
-  //     console.log('error')
-  //   }
-  // }
-
-  // getProjects()
   return (
     <div className="p-2">
     <div className="flex flex-col md:flex-row">
