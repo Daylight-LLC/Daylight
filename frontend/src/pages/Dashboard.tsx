@@ -1,14 +1,41 @@
 import React from 'react';
+import StatsCard from '../components/StatsCard';
+import MeetingCard from '../components/MeetingCard';
+import ArrowDropDownOutlinedIcon from '@mui/icons-material/ArrowDropDownOutlined';
+
+
+
 
 const Dashboard: React.FC = () => {
+
+  // async function getProjects() {
+  //   try{
+  //     const response = await fetch('http://localhost:5001/api/project')
+  //     console.log(response.json()) 
+  //   } catch{
+  //     console.log('error')
+  //   }
+  // }
+
+  // getProjects()
   return (
-    <div className="p-6 bg-gray-100 min-h-screen">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">ProjectPulse</h1>
-        <p className="text-lg text-gray-600">Welcome to your dashboard. Here you can view your recent activity and updates.</p>
+    <div className="p-2">
+    <div className="flex flex-col md:flex-row">
+      <div className="w-full md:w-3/4 flex flex-col md:mb-0">
+        <div className='w-full flex justify-between items-center'>
+          <h2 className="lg:text-2xl md:text-lg font-semibold">Your Dashboard</h2>
+          <div className='px-3 py-1 border border-gray-300 rounded-md flex items-center'>
+            last 30 days <ArrowDropDownOutlinedIcon className="ml-1" />
+          </div>
+        </div>
+        <StatsCard />
       </div>
-      {/* Add more dashboard content here */}
+
+      <div className="md:w-full lg:w-1/4 md:px-4 md:pb-4">
+        <MeetingCard />
+      </div>
     </div>
+  </div>
   );
 };
 

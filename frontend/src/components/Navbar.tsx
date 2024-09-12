@@ -1,35 +1,69 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import TextField from '@mui/material/TextField';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import AddIcon from '@mui/icons-material/Add';
 import AccountCircle from '@mui/icons-material/AccountCircle';
+import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 
-const Navbar: React.FC = () => {
+const textFieldStyles = {
+  borderRadius: '9999px', // Round corners
+  width: '100%', // Full width of the container
+  '& .MuiOutlinedInput-root': {
+    borderRadius: '9999px', // Round corners
+    '& fieldset': {
+      borderColor: 'white', // Border color
+    },
+    '&:hover fieldset': {
+      borderColor: 'white', // Border color on hover
+    },
+    '&.Mui-focused fieldset': {
+      borderColor: 'white', // Border color when focused
+    },
+    '& input': {
+      padding: '8px 12px', // Adjust padding to control height
+      fontSize: '0.875rem', // Adjust font size to control height
+      height: '1.5rem', // Explicitly set input height
+    },
+  },
+  '& .MuiInputBase-input': {
+    color: 'white', // Input text color
+  },
+  '& .MuiFormLabel-root': {
+    color: 'white', // Label color
+  },
+};
+
+const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
   return (
     <header className="bg-blue-500 text-white p-2 flex items-center justify-between shadow-md">
-      <div className="text-xl font-bold">
-        <Link to="/" className="hover:text-blue-400 pl-6">ProjectPulse</Link>
-      </div>
-      <div className="flex flex-2 mx-2">
-        <TextField
-          variant="outlined"
-          placeholder="Search..."
-          InputProps={{
-            endAdornment: (
-              <IconButton edge="end" color="inherit">
-                <SearchIcon />
-              </IconButton>
-            ),
-          }}
-          className="w-80"
-          InputLabelProps={{ style: { color: 'white' } }}
-        />
-      </div>
-      <div className="flex items-center space-x-4">
+      <IconButton color="inherit" onClick={toggleSidebar}>
+        <MenuOutlinedIcon />
+      </IconButton>
+      <div className="flex items-center space-x-2">
+        <div className="flex flex-2 mx-2">
+          <TextField
+            variant="outlined"
+            placeholder="Search..."
+            InputProps={{
+              endAdornment: (
+                <IconButton edge="end" color="inherit">
+                  <SearchIcon />
+                </IconButton>
+              ),
+              style: {
+                color: 'white', // Text color
+              },
+            }}
+            InputLabelProps={{ 
+              style: { color: 'white' }, 
+            }}
+            sx={textFieldStyles}
+            className="w-64"
+          />
+        </div>
         <IconButton color="inherit">
-          <AddIcon />
+          <NotificationsNoneOutlinedIcon />
         </IconButton>
         <IconButton color="inherit">
           <AccountCircle />

@@ -1,6 +1,14 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Login: React.FC = () => {
+  const navigate = useNavigate()
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    navigate('/app/dashboard'); // Redirect to the dashboard page
+  };
+
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="bg-white p-8 rounded-lg shadow-md w-full max-w-sm">
@@ -14,7 +22,7 @@ const Login: React.FC = () => {
             <span className="text-gray-700">Password</span>
             <input type="password" className="form-input mt-1 block w-full border-gray-300 rounded-md shadow-sm" placeholder="********" />
           </label>
-          <button type="submit" className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Login</button>
+          <button type="submit" onClick={handleSubmit} className="w-full bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">Login</button>
         </form>
       </div>
     </div>
