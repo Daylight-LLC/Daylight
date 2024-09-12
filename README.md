@@ -1,29 +1,29 @@
-# Daylight
+# ☀️ Daylight - Remote Team Performance Analyzer
 
-Daylight is a tool designed to help organizations effectively manage and evaluate remote development teams. The platform offers GitHub integration, tracks developer performance, and provides insights to improve efficiency and collaboration within remote teams.
+**Daylight** is a powerful tool designed to help organizations effectively manage and evaluate remote development teams. With seamless GitHub integration and performance tracking, Daylight provides valuable insights to improve efficiency and collaboration across teams. 
 
-## Features
+## ✨ Features
 
-- **GitHub Integration**: Seamless integration with GitHub for tracking issues, PRs, and team activity.
-- **Performance Tracking**: Monitor the efficiency of developers and teams by analyzing metrics like issue resolution time, PR activity, and more.
-- **Team Management**: Manage multiple teams and assign tasks, monitor progress, and approve/reject PRs directly from the app.
-- **AI-Driven Insights**: Gain actionable insights through AI to improve performance, efficiency, and team collaboration.
-- **Score-based System**: Get detailed scoring for developers and teams based on their efficiency and activity.
+- 🔗 **GitHub Integration**: Easily track issues, PRs, and team activity with GitHub integration.
+- 🚀 **Performance Tracking**: Monitor developer and team efficiency with metrics like issue resolution time, PR activity, and more.
+- 👥 **Team Management**: Manage multiple teams, assign tasks, and approve/reject PRs directly from the app.
+- 🤖 **AI-Driven Insights**: Leverage AI to generate actionable insights that boost performance and collaboration.
+- 🎯 **Score-based System**: Get detailed scoring for developers and teams based on their efficiency and productivity.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Frontend**: TypeScript, React, Tailwind CSS
-- **Backend**: Node.js, Express.js, MongoDB
-- **Build Tool**: Vite
-- **Database**: MongoDB
+- 💻 **Frontend**: TypeScript, React, Tailwind CSS
+- ⚙️ **Backend**: Node.js, Express.js, MongoDB
+- 🛠️ **Build Tool**: Vite
+- 🗄️ **Database**: MongoDB
 
-## Installation
+## ⚙️ Installation
 
 ### Prerequisites
 
-- Node.js (>= 14.x)
-- MongoDB (>= 4.x)
-- Git
+- 🟢 Node.js (>= 14.x)
+- 🍃 MongoDB (>= 4.x)
+- 🖥️ Git
 
 ### Steps to Install
 
@@ -49,6 +49,7 @@ Daylight is a tool designed to help organizations effectively manage and evaluat
    PORT=5000
    MONGO_URI=your_mongo_db_uri
    GITHUB_API_KEY=your_github_api_key
+
    
 4. Start the development servers:
 
@@ -66,26 +67,26 @@ Daylight is a tool designed to help organizations effectively manage and evaluat
 
    Open your browser and go to ```http://localhost:3000.```
 
-## Usage
+## 💼 Usage
 
 ### Managing Projects and Teams
 
-- Create Projects: Users can create new projects and invite team members.
-- Assign Issues: Issues can be assigned to developers directly from the dashboard.
-- PR Management: Review, approve, or reject pull requests from your team members.
-- Performance Analytics: Get insights on developer and team performance based on GitHub activity.
+- 🔧 Create Projects: Users can create new projects and invite team members.
+- 📝 Assign Issues: Assign issues to developers directly from the dashboard.
+- ✅ PR Management: Review, approve, or reject pull requests from your team members.
+- 📊 Performance Analytics: Gain insights into developer and team performance based on GitHub activity.
   
-### Developer Efficiency Tracking
+### 🔍 Developer Efficiency Tracking
 
-- Time taken to close issues.
-- PR approval and rejection history.
-- Number of commits and changes per day.
+- ⏳ Time taken to close issues.
+- ✅ PR approval and rejection history.
+- 🔄 Number of commits and changes per day.
   
-## Contributing
+## 🤝 Contributing
 
 We welcome contributions! Please read our Contributing Guide before making a pull request.
 
-## License
+## 📜 License
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 ## Contact
