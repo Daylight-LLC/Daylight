@@ -9,6 +9,7 @@ const teamSchema = new mongoose.Schema(
     teamLeadName: {
       type: String,
       required: true,
+      // make team lead schema to store their name and tasks
     },
     members: [teamMemberSchema],
   },
