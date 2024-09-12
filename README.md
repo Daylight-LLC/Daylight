@@ -29,7 +29,7 @@
 
 1. Clone the repository:
     ```bash
-    git clone https://github.com/your-username/remote-team-performance-analyzer.git
+    git clone https://github.com/Daylight-LLC/Daylight.git
     cd remote-team-performance-analyzer
     ```
 
