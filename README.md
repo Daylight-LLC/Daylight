@@ -1,6 +1,6 @@
-# ☀️ Daylight - Remote Team Performance Analyzer
+# ☀️ Daylight - Dev Team Performance Analyzer
 
-**Daylight** is a powerful tool designed to help organizations effectively manage and evaluate remote development teams. With seamless GitHub integration and performance tracking, Daylight provides valuable insights to improve efficiency and collaboration across teams. 
+**Daylight** is a powerful tool designed to help organizations effectively manage and evaluate development teams. With seamless GitHub integration and performance tracking, Daylight provides valuable insights to improve efficiency and collaboration across teams. 
 
 ## ✨ Features
 
@@ -30,7 +30,7 @@
 1. Clone the repository:
     ```bash
     git clone https://github.com/Daylight-LLC/Daylight.git
-    cd remote-team-performance-analyzer
+    cd Daylight
     ```
 
 2. Install dependencies for both frontend and backend:
