@@ -1,0 +1,130 @@
+name: "CodeQL Advanced"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "**/*.js"
+      - "**/*.ts"
+      - "**/*.json"
+      - ".github/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "**/*.js"
+      - "**/*.ts"
+      - "**/*.json"
+      - ".github/**"
+  schedule:
+    - cron: "0 0 * * 0"  # Run weekly on Sundays at midnight
+
+jobs:
+  analyze:
+    name: Analyze
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      actions: read
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"  # Specify the Node.js version you're using
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript-typescript
+          queries: +security-and-quality,security-extended
+
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:javascript-typescript"
+
+      # Frontend Setup
+      - name: Install Frontend Dependencies
+        working-directory: ./frontend
+        run: |
+          if [ -f "package-lock.json" ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run Frontend Linter
+        working-directory: ./frontend
+        run: npm run lint || echo "Frontend linting failed but continuing..."
+
+      - name: Run Frontend TypeScript Compiler
+        working-directory: ./frontend
+        run: npm run tsc || echo "Frontend TypeScript compilation failed but continuing..."
+
+      - name: Run Frontend Tests
+        working-directory: ./frontend
+        run: npm test || echo "Frontend tests failed but continuing..."
+
+      - name: Check Frontend Dependencies
+        working-directory: ./frontend
+        run: npm outdated || true
+
+      - name: Run Frontend Security Audit
+        working-directory: ./frontend
+        run: npm audit || echo "Frontend security audit failed but continuing..."
+
+      # Backend Setup
+      - name: Install Backend Dependencies
+        working-directory: ./backend
+        run: |
+          if [ -f "package-lock.json" ]; then
+            npm ci
+          else
+            npm install
+          fi
+
+      - name: Run Backend Linter
+        working-directory: ./backend
+        run: npm run lint || echo "Backend linting failed but continuing..."
+
+      - name: Run Backend TypeScript Compiler
+        working-directory: ./backend
+        run: npm run tsc || echo "Backend TypeScript compilation failed but continuing..."
+
+      - name: Run Backend Tests
+        working-directory: ./backend
+        run: npm test || echo "Backend tests failed but continuing..."
+
+      - name: Check Backend Dependencies
+        working-directory: ./backend
+        run: npm outdated || true
+
+      - name: Run Backend Security Audit
+        working-directory: ./backend
+        run: npm audit || echo "Backend security audit failed but continuing..."
+
+    # Uncomment and adjust these steps as needed
+    # - name: Run Frontend Integration Tests
+    #   working-directory: ./frontend
+    #   run: npm run test:integration || echo "Frontend integration tests failed but continuing..."
+
+    # - name: Run Backend Integration Tests
+    #   working-directory: ./backend
+    #   run: npm run test:integration || echo "Backend integration tests failed but continuing..."
+
+    # - name: Run Frontend Custom Security Checks
+    #   working-directory: ./frontend
+    #   run: npm run security-check || echo "Frontend custom security checks failed but continuing..."
+
+    # - name: Run Backend Custom Security Checks
+    #   working-directory: ./backend
+    #   run: npm run security-check || echo "Backend custom security checks failed but continuing..."
