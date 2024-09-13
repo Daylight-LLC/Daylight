@@ -2,6 +2,7 @@ import express from "express";
 import {
   addTeamMember,
   getTeamMembers,
+  updateTeamMember,
 } from "../controllers/teamMember.controller.js";
 import rateLimit from "express-rate-limit";
 
@@ -15,5 +16,10 @@ const rateLimiter = rateLimit({
 
 router.post("/:projectId/:teamId/teamMembers", rateLimiter, addTeamMember);
 router.get("/:projectId/:teamId/teamMembers", rateLimiter, getTeamMembers);
+router.put(
+  "/:projectId/:teamId/teamMembers/:teamMemberId",
+  rateLimiter,
+  updateTeamMember
+);
 
 export default router;
