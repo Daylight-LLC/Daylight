@@ -11,8 +11,11 @@ const projectSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // due date and status
+    // project manager name
     teams: [teamSchema],
   },
+
   {
     timestamps: true,
   }
