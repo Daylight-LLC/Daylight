@@ -1,6 +1,7 @@
 import express from "express";
 import {
   addTeamMember,
+  deleteTeamMember,
   getTeamMembers,
   updateTeamMember,
 } from "../controllers/teamMember.controller.js";
@@ -20,6 +21,11 @@ router.put(
   "/:projectId/:teamId/teamMembers/:teamMemberId",
   rateLimiter,
   updateTeamMember
+);
+router.delete(
+  "/:projectId/:teamId/teamMembers/:teamMemberId",
+  rateLimiter,
+  deleteTeamMember
 );
 
 export default router;
