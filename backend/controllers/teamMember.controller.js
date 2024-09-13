@@ -1,4 +1,4 @@
-import mongoose, { mongo } from "mongoose";
+import mongoose from "mongoose";
 import Project from "../models/project.model.js";
 
 export const addTeamMember = async (req, res) => {
