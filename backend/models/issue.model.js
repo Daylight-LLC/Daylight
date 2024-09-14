@@ -4,13 +4,21 @@ const issueSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  description: String,
+  description: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     enum: ["open", "in progress", "closed"],
     default: "open",
+    required: true,
   },
-  githubIssueLink: String,
+  githubIssueLink: {
+    type: String,
+    required: true,
+    default: "issuelink.github.com",
+  },
   createdAt: {
     type: Date,
     default: Date.now,

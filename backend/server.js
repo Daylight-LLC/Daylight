@@ -5,6 +5,7 @@ import projectRoutes from "./routes/project.route.js";
 import teamRoutes from "./routes/team.routes.js";
 import cors from "cors";
 import teamMemberRoutes from "./routes/teamMember.route.js";
+import issueRoutes from "./routes/issue.route.js";
 
 dotenv.config();
 const PORT = 5001;
@@ -22,6 +23,7 @@ app.use(
 app.use("/api/project", projectRoutes);
 app.use("/api/project", teamRoutes);
 app.use("/api/project", teamMemberRoutes);
+app.use("/api/project", issueRoutes);
 
 app.listen(PORT, () => {
   connectDB();
