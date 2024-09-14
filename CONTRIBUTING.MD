@@ -1,6 +1,6 @@
-# Contributing to Remote Team Performance Analyzer
+# Contributing to Daylight
 
-First off, thank you for considering contributing to Remote Team Performance Analyzer! It's people like you that make this tool a great resource for organizations managing remote development teams.
+First off, thank you for considering contributing! It's people like you that make this tool a great resource for organizations managing remote development teams.
 
 ## Code of Conduct
 
@@ -96,6 +96,32 @@ Obvious fixes are minor contributions that do not introduce any new functionalit
 - Adding logging messages or debugging output.
 - Metadata changes like `.gitignore` or build scripts.
 - Moving source files between directories or packages.
+
+## Branch Naming Guidelines
+
+Please follow these conventions when creating new branches:
+
+### Format
+
+
+- **`type`**: The nature of the branch (`feature`, `bugfix`, `hotfix`, `docs`, `test`).
+- **`issue-number`**: The related issue or task ID (if applicable).
+- **`short-description`**: Brief summary of the branch’s purpose (use hyphens `-` between words).
+
+### Examples
+
+- `feature/123-add-login`
+- `bugfix/456-fix-login-error`
+- `docs/101-update-readme`
+- `release/v1.0.0`
+
+### Rules
+
+1. Use lowercase letters only.
+2. Separate words with hyphens (`-`).
+3. Keep it concise (3-5 words).
+4. Avoid special characters.
+
 
 ## Attribution
 
