@@ -11,7 +11,7 @@ export interface Member {
   _id: string;
   name: string;
   role: string;
-  assignedIssues: any[];
+  assignedIssues: Issue[];
   createdAt: string;
   updatedAt?: string;
 }

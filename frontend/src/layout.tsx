@@ -15,7 +15,6 @@ const Layout: React.FC = () => {
     }
   };
 
-  // Update the state on initial render and on resize
   useEffect(() => {
     updateSidebarState();
     window.addEventListener('resize', updateSidebarState);
@@ -23,7 +22,6 @@ const Layout: React.FC = () => {
     return () => window.removeEventListener('resize', updateSidebarState);
   }, []);
 
-  // Toggle function, but will not affect if screen width is md or smaller
   const toggleSidebar = () => {
     if (window.innerWidth > 768) {
       setIsOnlyIcon(!isOnlyIcon);
@@ -31,8 +29,10 @@ const Layout: React.FC = () => {
   };
   return (
     <>
-    <div className="flex">
+    <div className="flex w-full">
+      <div>
         <Sidebar isOnlyIcon={isOnlyIcon}/>
+      </div>
         <div className='w-full'>
           <Navbar toggleSidebar={toggleSidebar} />
           <div className="flex flex-1">
@@ -43,9 +43,7 @@ const Layout: React.FC = () => {
         </div>
 
     </div>
-    <div>
-      <Footer/>
-    </div>
+
     </>
   );
 };

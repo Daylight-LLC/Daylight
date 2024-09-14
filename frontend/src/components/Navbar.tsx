@@ -36,10 +36,13 @@ const textFieldStyles = {
 
 const Navbar: React.FC<{ toggleSidebar: () => void }> = ({ toggleSidebar }) => {
   return (
-    <header className="bg-blue-500 text-white p-2 flex items-center justify-between shadow-md">
-      <IconButton color="inherit" onClick={toggleSidebar}>
-        <MenuOutlinedIcon />
-      </IconButton>
+    <header className={`bg-blue-500 text-white w-full p-2 flex items-center ${window.innerWidth > 768 ? 'justify-between': 'justify-end'} shadow-md`}>
+      {window.innerWidth > 768 && (
+        <IconButton color="inherit" onClick={toggleSidebar}>
+          <MenuOutlinedIcon />
+        </IconButton>
+      )}
+
       <div className="flex items-center space-x-2">
         <div className="flex flex-2 mx-2">
           <TextField

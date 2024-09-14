@@ -14,7 +14,7 @@ const menuItems = [
 
 const Sidebar: React.FC<{ isOnlyIcon: boolean }> = ({ isOnlyIcon }) => {
   return (
-    <aside className={` bg-blue-500 text-white h-screen p-1 ${isOnlyIcon ? 'w-16' : 'w-56'}`}>
+    <aside className={` bg-blue-500 text-white h-full p-1 ${isOnlyIcon ? 'w-16' : 'w-56'}`}>
       <div className='py-3'>
         <div className="text-xl font-bold pb-3 flex justify-center">
           { !isOnlyIcon ? 
