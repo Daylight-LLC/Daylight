@@ -1,6 +1,10 @@
 import express from "express";
 import rateLimit from "express-rate-limit";
-import { addIssue, getIssues } from "../controllers/issue.controller.js";
+import {
+  addIssue,
+  getIssues,
+  updateIssue,
+} from "../controllers/issue.controller.js";
 
 const router = express.Router();
 
@@ -12,5 +16,10 @@ const rateLimiter = rateLimit({
 
 router.post("/:projectId/:teamId/:teamMemberId/issues", rateLimiter, addIssue);
 router.get("/:projectId/:teamId/:teamMemberId/issues", rateLimiter, getIssues);
+router.put(
+  "/:projectId/:teamId/:teamMemberId/:issueId/issues",
+  rateLimiter,
+  updateIssue
+);
 
 export default router;
