@@ -1,76 +1,79 @@
-import React, { useState, useEffect } from 'react';
-import Dropdown from './common/Dropdown';
-import { TableContainer, Table, TableBody, TableCell, TableHead, TableRow, Paper } from '@mui/material';
-import { Project } from '../interfaces/interfaces';
-
-function createData(
-  projectName: string,
-  teamLead: string,
-  createdAt: string,
-  status: string
-) {
-  return { projectName, teamLead, createdAt, status };
-}
+import React from "react";
+import Dropdown from "./common/Dropdown";
+import {
+  TableContainer,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import { Project } from "../interfaces/interfaces";
 
 interface ProjectSummaryProps {
-    projects: Project[];
-  }
-  
-  const ProjectSummary: React.FC<ProjectSummaryProps> = ({ projects }) => {
+  projects: Project[];
+}
 
-
-
-  const rows = projects.map(project => {
-    const teamLead = project.teams[0]?.teamLeadName || 'Unknown';
-    return createData(project.name, teamLead, project.createdAt, 'Open');
-  });
+const ProjectSummary: React.FC<ProjectSummaryProps> = ({ projects }) => {
+  const rows = projects.map((project) => ({
+    projectName: project.name,
+    teamLead: project.teams[0]?.teamLeadName || "Unknown",
+    createdAt: project.createdAt,
+    status: "Open",
+  }));
 
   const dropdowns = [
     {
-      label: 'Project',
-      options: ['Internal', 'Client', 'Research', 'Maintenance', 'New Development']
+      label: "Project",
+      options: [
+        "Internal",
+        "Client",
+        "Research",
+        "Maintenance",
+        "New Development",
+      ],
     },
     {
-      label: 'Status',
-      options: ['Open', 'Progress', 'Review', 'Closed']
-    }
+      label: "Status",
+      options: ["Open", "Progress", "Review", "Closed"],
+    },
   ];
 
   return (
-    <div className='border border-gray-300 rounded-md'>
-      <div className='w-full flex justify-between items-center p-3'>
-        <h2 className="lg:text-xl md:text-lg font-semibold">Project Summary</h2>
-        <div className='flex gap-4'>
+    <div className="border border-gray-300 rounded-md">
+      <div className="flex justify-between items-center p-4">
+        <h2 className="text-lg md:text-xl font-semibold">Project Summary</h2>
+        <div className="flex gap-4">
           {dropdowns.map((dropdown, index) => (
-            <div key={index} className='border border-gray-300 rounded-md'>
-              <Dropdown label={dropdown.label} options={dropdown.options} />
-            </div>
+            <Dropdown
+              key={index}
+              label={dropdown.label}
+              options={dropdown.options}
+            />
           ))}
         </div>
       </div>
-      <div className='p-4' style={{ height: '17rem', overflow: 'auto' }}>
-        <TableContainer component={Paper} style={{ maxHeight: '100%', overflowX: 'hidden' }}>
-          <Table stickyHeader sx={{ minWidth: 650 }} aria-label="project table">
+      <div className="p-4" style={{ height: "17rem", overflowY: "auto" }}>
+        <TableContainer component={Paper}>
+          <Table stickyHeader aria-label="project table">
             <TableHead>
               <TableRow>
-                <TableCell style={{ fontWeight: 'bold' }}>Project Name</TableCell>
-                <TableCell align="left" style={{ fontWeight: 'bold' }}>Team Lead</TableCell>
-                <TableCell align="left" style={{ fontWeight: 'bold' }}>Created At</TableCell>
-                <TableCell align="left" style={{ fontWeight: 'bold' }}>Status</TableCell>
+                <TableCell style={{ fontWeight: "bold" }}>
+                  Project Name
+                </TableCell>
+                <TableCell style={{ fontWeight: "bold" }}>Team Lead</TableCell>
+                <TableCell style={{ fontWeight: "bold" }}>Created At</TableCell>
+                <TableCell style={{ fontWeight: "bold" }}>Status</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
               {rows.map((row, index) => (
-                <TableRow
-                  key={index}
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                >
-                  <TableCell component="th" scope="row" style={{ fontWeight: 'bold' }}>
-                    {row.projectName}
-                  </TableCell>
-                  <TableCell align="left">{row.teamLead}</TableCell>
-                  <TableCell align="left">{row.createdAt}</TableCell>
-                  <TableCell align="left">{row.status}</TableCell>
+                <TableRow key={index}>
+                  <TableCell>{row.projectName}</TableCell>
+                  <TableCell>{row.teamLead}</TableCell>
+                  <TableCell>{row.createdAt}</TableCell>
+                  <TableCell>{row.status}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
