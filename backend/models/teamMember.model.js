@@ -11,6 +11,10 @@ const teamMemberSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // status: {
+    //   enum: ["online", "offline"],
+    //   default: "online",
+    // },
     assignedIssues: [issueSchema],
   },
   {
