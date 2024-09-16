@@ -2,6 +2,7 @@ import express from "express";
 import rateLimit from "express-rate-limit";
 import {
   addIssue,
+  deleteIssue,
   getIssues,
   updateIssue,
 } from "../controllers/issue.controller.js";
@@ -17,9 +18,14 @@ const rateLimiter = rateLimit({
 router.post("/:projectId/:teamId/:teamMemberId/issues", rateLimiter, addIssue);
 router.get("/:projectId/:teamId/:teamMemberId/issues", rateLimiter, getIssues);
 router.put(
-  "/:projectId/:teamId/:teamMemberId/:issueId/issues",
+  "/:projectId/:teamId/:teamMemberId/issues/:issueId",
   rateLimiter,
   updateIssue
+);
+router.delete(
+  "/:projectId/:teamId/:teamMemberId/issues/:issueId",
+  rateLimiter,
+  deleteIssue
 );
 
 export default router;
