@@ -30,8 +30,8 @@ import LogoutRoundedIcon from "@mui/icons-material/LogoutRounded";
 import BrightnessAutoRoundedIcon from "@mui/icons-material/BrightnessAutoRounded";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
-import ColorSchemeToggle from "./ColorSchemeToggle";
-import { closeSidebar } from "../utils";
+import ColorSchemeToggle from "../../theme/ColorSchemeToggle";
+import { closeSidebar } from "../../utils";
 import { Link } from "react-router-dom";
 
 function Toggler({
@@ -164,7 +164,7 @@ export default function Sidebar() {
 
           <Link to="dashboard">
             <ListItem>
-              <ListItemButton selected>
+              <ListItemButton>
                 <DashboardRoundedIcon />
                 <ListItemContent>
                   <Typography level="title-sm">Dashboard</Typography>
@@ -174,7 +174,7 @@ export default function Sidebar() {
           </Link>
 
           <ListItem>
-            <ListItemButton>
+            <ListItemButton selected>
               <ShoppingCartRoundedIcon />
               <ListItemContent>
                 <Typography level="title-sm">Orders</Typography>
@@ -258,17 +258,15 @@ export default function Sidebar() {
               )}
             >
               <List sx={{ gap: 0.5 }}>
-                <Link to="myprofile">
-                  <ListItem sx={{ mt: 0.5 }}>
-                    <ListItemButton
-                      role="menuitem"
-                      component="a"
-                      href="/joy-ui/getting-started/templates/profile-dashboard/"
-                    >
-                      My profile
-                    </ListItemButton>
-                  </ListItem>
-                </Link>
+                <ListItem sx={{ mt: 0.5 }}>
+                  <ListItemButton
+                    role="menuitem"
+                    component="a"
+                    href="/joy-ui/getting-started/templates/profile-dashboard/"
+                  >
+                    My profile
+                  </ListItemButton>
+                </ListItem>
                 <ListItem>
                   <ListItemButton>Create a new user</ListItemButton>
                 </ListItem>

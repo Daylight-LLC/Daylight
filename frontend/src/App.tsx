@@ -1,21 +1,15 @@
-import { CssVarsProvider } from "@mui/joy/styles";
-import CssBaseline from "@mui/joy/CssBaseline";
-import Box from "@mui/joy/Box";
-
-import Sidebar from "./components/Sidebar";
-
-import Header from "./components/Header";
 import { Outlet } from "react-router-dom";
+import Layout from "./components/Layout";
+import { CssVarsProvider } from "@mui/joy";
 
-export default function JoyOrderDashboardTemplate() {
+export default function App() {
   return (
-    <CssVarsProvider disableTransitionOnChange>
-      <CssBaseline />
-      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
-        <Header />
-        <Sidebar />
-        <Outlet />
-      </Box>
-    </CssVarsProvider>
+    <div>
+      <CssVarsProvider>
+        <Layout>
+          <Outlet />
+        </Layout>
+      </CssVarsProvider>
+    </div>
   );
 }

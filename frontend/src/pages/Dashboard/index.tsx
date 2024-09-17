@@ -1,39 +1,84 @@
-import { Box, Divider, Typography } from "@mui/joy";
-import { Link } from "@mui/material";
+import Box from "@mui/joy/Box";
+import Typography from "@mui/joy/Typography";
+import GlobalStyles from "@mui/joy/GlobalStyles";
+import { Breadcrumbs } from "@mui/joy";
+import { Link } from "react-router-dom";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import ChevronRightRoundedIcon from "@mui/icons-material/ChevronRightRounded";
-import Breadcrumbs from "@mui/joy/Breadcrumbs";
+import KeyboardArrowRightRoundedIcon from "@mui/icons-material/KeyboardArrowRightRounded";
+import DashboardCard from "../../components/DashboardCard";
+import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
+import DashboardProjectsTable from "../../components/DashboardProjectsTable";
 
 const Dashboard = () => {
   return (
-    <div>
-      <Box sx={{ px: { xs: 2, md: 6 } }}>
-        <Breadcrumbs
-          size="sm"
-          aria-label="breadcrumbs"
-          separator={<ChevronRightRoundedIcon fontSize="sm" />}
-          sx={{ pl: 0 }}
-        >
-          <Link
-            underline="none"
-            color="neutral"
-            href="#some-link"
-            aria-label="Home"
-          >
-            <HomeRoundedIcon />
-          </Link>
-
-          <Typography color="primary" sx={{ fontWeight: 500, fontSize: 12 }}>
-            Dashboard
-          </Typography>
-        </Breadcrumbs>
-        <Typography level="h2" component="h1" sx={{ mt: 1, mb: 2 }}>
+    <Box
+      sx={{
+        py: 1.5,
+        px: 3,
+        display: "flex",
+        flexDirection: "column",
+      }}
+    >
+      <GlobalStyles
+        styles={(theme) => ({
+          body: {
+            backgroundColor: theme.vars.palette.background.body,
+            color: theme.vars.palette.text.primary,
+          },
+        })}
+      />
+      <Breadcrumbs size="sm" separator="">
+        <Link to="/">
+          <HomeRoundedIcon />
+        </Link>
+        <KeyboardArrowRightRoundedIcon fontSize="small" />
+        <Typography level="body-sm" color="neutral">
           Dashboard
         </Typography>
+      </Breadcrumbs>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Typography level="h1">Dashboard</Typography>
       </Box>
-      <Divider sx={{ width: "100svw" }} />
-      <Box></Box>
-    </div>
+      <Box display={"flex"} flexDirection={"column"} gap={3}>
+        <Box
+          sx={{
+            pt: 2,
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: { xs: "column", md: "row" },
+            gap: 3,
+          }}
+        >
+          <DashboardCard
+            title="Projects"
+            values="10/20"
+            icon={<AccountTreeRoundedIcon fontSize="large" />}
+          />
+          <DashboardCard
+            title="Projects"
+            values="10/20"
+            icon={<AccountTreeRoundedIcon fontSize="large" />}
+          />
+          <DashboardCard
+            title="Projects"
+            values="10/20"
+            icon={<AccountTreeRoundedIcon fontSize="large" />}
+          />
+          <DashboardCard
+            title="Projects"
+            values="10/20"
+            icon={<AccountTreeRoundedIcon fontSize="large" />}
+          />
+        </Box>
+        <DashboardProjectsTable />
+      </Box>
+    </Box>
   );
 };
 
