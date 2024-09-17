@@ -31,7 +31,7 @@ const Layout: React.FC = () => {
   };
   return (
     <>
-    <div className="flex">
+    <div className="flex h-full">
         <Sidebar isOnlyIcon={isOnlyIcon}/>
         <div className='w-full'>
           <Navbar toggleSidebar={toggleSidebar} />
@@ -42,9 +42,6 @@ const Layout: React.FC = () => {
           </div>
         </div>
 
-    </div>
-    <div>
-      <Footer/>
     </div>
     </>
   );

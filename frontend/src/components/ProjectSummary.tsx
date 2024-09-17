@@ -37,7 +37,7 @@ interface ProjectSummaryProps {
   ];
 
   return (
-    <div className='border border-gray-300 rounded-md'>
+    <div className='border border-gray-300 rounded-md w-full lg:basis-2/3 md:basis-full ' style={{contain: 'content'}}>
       <div className='w-full flex justify-between items-center p-3'>
         <h2 className="lg:text-xl md:text-lg font-semibold">Project Summary</h2>
         <div className='flex gap-4'>
@@ -48,9 +48,9 @@ interface ProjectSummaryProps {
           ))}
         </div>
       </div>
-      <div className='p-4' style={{ height: '17rem', overflow: 'auto' }}>
+      <div className='p-4' style={{ height: '17rem', overflow: 'auto', contain: 'content' }}>
         <TableContainer component={Paper} style={{ maxHeight: '100%', overflowX: 'hidden' }}>
-          <Table stickyHeader sx={{ minWidth: 650 }} aria-label="project table">
+          <Table stickyHeader sx={{ minWidth: '15rem'}} aria-label="project table">
             <TableHead>
               <TableRow>
                 <TableCell style={{ fontWeight: 'bold' }}>Project Name</TableCell>
