@@ -1,14 +1,15 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import './index.css';
-import AppRoutes from './routes';
+import { Outlet } from "react-router-dom";
+import Layout from "./components/Layout";
+import { CssVarsProvider } from "@mui/joy";
 
-const App: React.FC = () => {
+export default function App() {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <div>
+      <CssVarsProvider>
+        <Layout>
+          <Outlet />
+        </Layout>
+      </CssVarsProvider>
+    </div>
   );
-};
-
-export default App;
+}
