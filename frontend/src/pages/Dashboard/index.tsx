@@ -1,14 +1,14 @@
 import Box from "@mui/joy/Box";
 import Typography from "@mui/joy/Typography";
 import GlobalStyles from "@mui/joy/GlobalStyles";
-import { Breadcrumbs } from "@mui/joy";
-import { Link } from "react-router-dom";
-import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
-import KeyboardArrowRightRoundedIcon from "@mui/icons-material/KeyboardArrowRightRounded";
+
 import DashboardCard from "../../components/DashboardCard";
 import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 import DashboardProjectsTable from "../../components/DashboardProjectsTable";
 import ProjectProgress from "../../components/ProjectProgress";
+import Topbar from "../../components/Topbar";
+import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
+import { Add } from "@mui/icons-material";
 
 const Dashboard = () => {
   return (
@@ -28,15 +28,13 @@ const Dashboard = () => {
           },
         })}
       />
-      <Breadcrumbs size="sm" separator="">
-        <Link to="/">
-          <HomeRoundedIcon />
-        </Link>
-        <KeyboardArrowRightRoundedIcon fontSize="small" />
-        <Typography level="body-sm" color="neutral">
-          Dashboard
-        </Typography>
-      </Breadcrumbs>
+      <Topbar
+        title="Dashboard"
+        path="/"
+        icon={<HomeRoundedIcon />}
+        buttonIcon={<Add />}
+        buttonText={"Add Widgets"}
+      />
       <Box
         sx={{
           display: "flex",
