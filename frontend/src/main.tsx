@@ -1,14 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import MyProfile from "./components/MyProfile.tsx";
+import Dashboard from "./pages/Dashboard/index.tsx";
 
-// Create a theme instance.
-const theme = createTheme();
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "myprofile",
+        element: <MyProfile />,
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+    ],
+  },
+]);
 
-ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <App />
-  </ThemeProvider>,
-  document.getElementById('root')
+createRoot(document.getElementById("root")!).render(
+  <StrictMode>
+    <RouterProvider router={router} />
+  </StrictMode>
 );

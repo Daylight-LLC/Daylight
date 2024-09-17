@@ -1,14 +1,21 @@
-import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
-import './index.css';
-import AppRoutes from './routes';
+import { CssVarsProvider } from "@mui/joy/styles";
+import CssBaseline from "@mui/joy/CssBaseline";
+import Box from "@mui/joy/Box";
 
-const App: React.FC = () => {
+import Sidebar from "./components/Sidebar";
+
+import Header from "./components/Header";
+import { Outlet } from "react-router-dom";
+
+export default function JoyOrderDashboardTemplate() {
   return (
-    <Router>
-      <AppRoutes />
-    </Router>
+    <CssVarsProvider disableTransitionOnChange>
+      <CssBaseline />
+      <Box sx={{ display: "flex", minHeight: "100dvh" }}>
+        <Header />
+        <Sidebar />
+        <Outlet />
+      </Box>
+    </CssVarsProvider>
   );
-};
-
-export default App;
+}
