@@ -10,6 +10,7 @@ import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 import DashboardProjectsTable from "../../components/DashboardProjectsTable";
 import ProjectProgress from "../../components/ProjectProgress";
 
+
 const Dashboard = () => {
   return (
     <Box
@@ -62,12 +63,12 @@ const Dashboard = () => {
             icon={<AccountTreeRoundedIcon fontSize="large" />}
           />
           <DashboardCard
-            title="Projects"
+            title="Tasks"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
           />
           <DashboardCard
-            title="Projects"
+            title="Issues"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
           />
