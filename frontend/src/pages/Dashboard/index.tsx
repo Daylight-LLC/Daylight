@@ -8,6 +8,7 @@ import KeyboardArrowRightRoundedIcon from "@mui/icons-material/KeyboardArrowRigh
 import DashboardCard from "../../components/DashboardCard";
 import AccountTreeRoundedIcon from "@mui/icons-material/AccountTreeRounded";
 import DashboardProjectsTable from "../../components/DashboardProjectsTable";
+import ProjectProgress from "../../components/ProjectProgress";
 
 const Dashboard = () => {
   return (
@@ -76,7 +77,16 @@ const Dashboard = () => {
             icon={<AccountTreeRoundedIcon fontSize="large" />}
           />
         </Box>
-        <DashboardProjectsTable />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <DashboardProjectsTable />
+          <ProjectProgress />
+        </Box>
       </Box>
     </Box>
   );

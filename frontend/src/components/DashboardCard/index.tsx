@@ -14,10 +14,10 @@ const DashboardCard: React.FC<CardProps> = ({ title, values, icon }) => {
         width: 250,
         height: 100,
         p: 2,
-        borderRadius: 4,
+        borderRadius: "sm",
         display: "flex",
         justifyContent: "space-around",
-        boxShadow: 10,
+        boxShadow: "sm",
       }}
     >
       <Box
