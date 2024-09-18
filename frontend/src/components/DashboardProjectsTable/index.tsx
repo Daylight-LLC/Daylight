@@ -349,12 +349,14 @@ export default function DashboardProjectsTable() {
   return (
     <Sheet
       variant="outlined"
-      sx={{ width: "75%", boxShadow: "sm", borderRadius: "sm" }}
+      sx={{
+        width: { xs: "100%", md: "75%" },
+        boxShadow: "sm",
+        borderRadius: "sm",
+      }}
     >
       <EnhancedTableToolbar numSelected={selected.length} />
       <Table
-        stickyHeader
-        stickyFooter
         aria-labelledby="tableTitle"
         hoverRow
         sx={{

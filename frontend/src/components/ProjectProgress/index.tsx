@@ -12,7 +12,8 @@ export default function ProjectProgress() {
     <Sheet
       variant="outlined"
       sx={{
-        width: 250,
+        width: "15.6rem",
+        height: { xs: "6.25rem", md: "21rem" },
         borderRadius: "sm",
         display: "flex",
         flexDirection: "column",
