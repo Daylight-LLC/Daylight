@@ -3,10 +3,10 @@ import { ApolloServer } from "apollo-server-express";
 import { typeDefs } from "./graphql/typeDefs/index.js";
 import { resolvers } from "./graphql/resolvers/index.js";
 import connectDB from "./config/database.js";
-import userRoutes from "./routes/userRoutes.js";
-import projectRoutes from "./routes/projectRoutes.js";
-import teamRoutes from "./routes/teamRoutes.js";
-import issueRoutes from "./routes/issueRoutes.js";
+import userRoutes from "./routes/user.routes.js";
+import projectRoutes from "./routes/project.routes.js";
+import teamRoutes from "./routes/team.routes.js";
+import issueRoutes from "./routes/issue.routes.js";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -32,7 +32,7 @@ async function startApolloServer() {
   await server.start();
   server.applyMiddleware({ app });
 
-  const PORT = process.env.PORT || 4000;
+  const PORT = process.env.PORT || 5001;
   app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
     console.log(

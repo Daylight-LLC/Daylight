@@ -1,6 +1,6 @@
-import { Schema, Model } from "mongoose";
+import mongoose from "mongoose";
 
-const userSchema = new Schema(
+const userSchema = new mongoose.Schema(
   {
     username: { type: String, required: true, unique: true },
     email: { type: String, required: true, unique: true },
@@ -10,8 +10,21 @@ const userSchema = new Schema(
       enum: ["PROJECT_MANAGER", "TEAM_LEAD", "TEAM_MEMBER"],
       required: true,
     },
+    team: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Team",
+      required: function () {
+        return this.role !== "PROJECT_MANAGER";
+      },
+    },
+    projects: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Project",
+      },
+    ],
   },
   { timestamps: true }
 );
 
-export const User = Model("User", userSchema);
+export const User = mongoose.model("User", userSchema);

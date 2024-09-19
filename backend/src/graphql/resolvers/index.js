@@ -1,7 +1,7 @@
-import { User } from "../../models/User.js";
-import { Project } from "../../models/Project.js";
-import { Team } from "../../models/Team.js";
-import { Issue } from "../../models/Issue.js";
+import { User } from "../../models/User.model.js";
+import { Project } from "../../models/Project.model.js";
+import { Team } from "../../models/Team.model.js";
+import { Issue } from "../../models/Issue.model.js";
 import bcrypt from "bcryptjs";
 
 export const resolvers = {

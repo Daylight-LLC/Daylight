@@ -1,20 +1,88 @@
-import { User } from "../models/User.js";
+// src/controllers/user.controller.js
+import { User } from "../models/User.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
 export const userController = {
   register: async (req, res) => {
     try {
-      const { username, email, password, role } = req.body;
+      const { username, email, password, role, teamId, projectId } = req.body;
       const hashedPassword = await bcrypt.hash(password, 10);
-      const user = new User({
+
+      let user = new User({
         username,
         email,
         password: hashedPassword,
         role,
       });
+
+      if (role !== "PROJECT_MANAGER") {
+        if (!teamId) {
+          return res
+            .status(400)
+            .json({
+              error: "Team ID is required for non-PROJECT_MANAGER roles",
+            });
+        }
+        const team = await Team.findById(teamId);
+        if (!team) {
+          return res.status(404).json({ error: "Team not found" });
+        }
+        user.team = teamId;
+      }
+
+      if (projectId) {
+        const project = await Project.findById(projectId);
+        if (!project) {
+          return res.status(404).json({ error: "Project not found" });
+        }
+        user.projects = [projectId];
+      }
+
       await user.save();
-      res.status(201).json({ message: "User created successfully" });
+
+      if (role !== "PROJECT_MANAGER") {
+        await Team.findByIdAndUpdate(teamId, { $push: { members: user._id } });
+      }
+
+      if (projectId) {
+        await Project.findByIdAndUpdate(projectId, {
+          $push: { teams: user.team },
+        });
+      }
+
+      res
+        .status(201)
+        .json({ message: "User created successfully", userId: user._id });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  addUserToProject: async (req, res) => {
+    try {
+      const { userId, projectId } = req.body;
+      const user = await User.findById(userId);
+      const project = await Project.findById(projectId);
+
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+      if (!project) {
+        return res.status(404).json({ error: "Project not found" });
+      }
+
+      if (!user.projects.includes(projectId)) {
+        user.projects.push(projectId);
+        await user.save();
+      }
+
+      if (user.team && !project.teams.includes(user.team)) {
+        project.teams.push(user.team);
+        await project.save();
+      }
+
+      res.json({ message: "User added to project successfully" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -30,7 +98,10 @@ export const userController = {
       const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
         expiresIn: "1h",
       });
-      res.json({ token });
+      res.json({
+        token,
+        user: { id: user._id, username: user.username, role: user.role },
+      });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -40,6 +111,38 @@ export const userController = {
     try {
       const users = await User.find();
       res.json(users);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  getUserById: async (req, res) => {
+    try {
+      const user = await User.findById(req.params.id);
+      if (!user) return res.status(404).json({ message: "User not found" });
+      res.json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  updateUser: async (req, res) => {
+    try {
+      const user = await User.findByIdAndUpdate(req.params.id, req.body, {
+        new: true,
+      });
+      if (!user) return res.status(404).json({ message: "User not found" });
+      res.json({ success: true, data: user });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  deleteUser: async (req, res) => {
+    try {
+      const user = await User.findByIdAndDelete(req.params.id);
+      if (!user) return res.status(404).json({ message: "User not found" });
+      res.json({ message: "User deleted successfully" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
