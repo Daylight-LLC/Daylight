@@ -1,5 +1,8 @@
 // src/controllers/user.controller.js
 import { User } from "../models/User.model.js";
+import { Team } from "../models/Team.model.js";
+import { Project } from "../models/Project.model.js";
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
@@ -16,21 +19,18 @@ export const userController = {
         role,
       });
 
-      if (role !== "PROJECT_MANAGER") {
-        if (!teamId) {
-          return res
-            .status(400)
-            .json({
-              error: "Team ID is required for non-PROJECT_MANAGER roles",
-            });
-        }
+      // Team association (optional for all roles)
+      if (teamId) {
         const team = await Team.findById(teamId);
         if (!team) {
           return res.status(404).json({ error: "Team not found" });
         }
         user.team = teamId;
+        // Add user to team members
+        await Team.findByIdAndUpdate(teamId, { $push: { members: user._id } });
       }
 
+      // Project association (optional for all roles)
       if (projectId) {
         const project = await Project.findById(projectId);
         if (!project) {
@@ -40,16 +40,6 @@ export const userController = {
       }
 
       await user.save();
-
-      if (role !== "PROJECT_MANAGER") {
-        await Team.findByIdAndUpdate(teamId, { $push: { members: user._id } });
-      }
-
-      if (projectId) {
-        await Project.findByIdAndUpdate(projectId, {
-          $push: { teams: user.team },
-        });
-      }
 
       res
         .status(201)

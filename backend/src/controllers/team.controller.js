@@ -1,34 +1,61 @@
 import { Team } from "../models/Team.model.js";
+import { Project } from "../models/Project.model.js";
 
 export const teamController = {
   createTeam: async (req, res) => {
     try {
-      const { name, teamLeadId, projectId } = req.body;
+      const { name, projectId } = req.body;
 
-      const teamLead = await User.findById(teamLeadId);
-      if (!teamLead) {
-        return res.status(404).json({ error: "Team lead not found" });
-      }
-
-      if (teamLead.role !== "TEAM_LEAD") {
-        return res
-          .status(400)
-          .json({ error: "Team lead must have TEAM_LEAD role" });
+      // Check if the project exists
+      const project = await Project.findById(projectId);
+      if (!project) {
+        return res.status(404).json({ error: "Project not found" });
       }
 
       const team = new Team({
         name,
-        teamLead: teamLeadId,
         project: projectId,
-        members: [teamLeadId],
+        members: [], // Initialize with an empty array
       });
 
       await team.save();
 
-      // Update the team lead's team
-      await User.findByIdAndUpdate(teamLeadId, { team: team._id });
+      // Add the team to the project's teams array
+      await Project.findByIdAndUpdate(projectId, {
+        $push: { teams: team._id },
+      });
 
       res.status(201).json(team);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  assignTeamLead: async (req, res) => {
+    try {
+      const { teamId, userId } = req.body;
+
+      const team = await Team.findById(teamId);
+      const user = await User.findById(userId);
+
+      if (!team) {
+        return res.status(404).json({ error: "Team not found" });
+      }
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      if (user.role !== "TEAM_LEAD") {
+        return res.status(400).json({ error: "User must have TEAM_LEAD role" });
+      }
+
+      team.teamLead = userId;
+      user.team = teamId;
+
+      await team.save();
+      await user.save();
+
+      res.json({ message: "Team lead assigned successfully", team });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

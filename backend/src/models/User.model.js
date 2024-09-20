@@ -13,9 +13,7 @@ const userSchema = new mongoose.Schema(
     team: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Team",
-      required: function () {
-        return this.role !== "PROJECT_MANAGER";
-      },
+      required: false,
     },
     projects: [
       {

@@ -6,7 +6,7 @@ const teamSchema = new mongoose.Schema(
     teamLead: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
+      required: false,
     },
     members: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
     project: {

@@ -4,7 +4,7 @@ const projectSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    dueDate: { type: Date, required: true },
+    dueDate: { type: Date, required: true, default: Date.now() },
     status: {
       type: String,
       enum: ["NOT_STARTED", "IN_PROGRESS", "COMPLETED"],

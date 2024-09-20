@@ -4,9 +4,13 @@ import { projectController } from "../controllers/project.controller.js";
 const router = express.Router();
 
 router.post("/", projectController.createProject);
+router.post("/team", projectController.addTeamToProject);
+
 router.get("/", projectController.getProjects);
 router.get("/:id", projectController.getProjectById);
+
 router.put("/:id", projectController.updateProject);
+
 router.delete("/:id", projectController.deleteProject);
 
 export default router;
