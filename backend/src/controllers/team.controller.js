@@ -1,5 +1,6 @@
 import { Team } from "../models/Team.model.js";
 import { Project } from "../models/Project.model.js";
+import { User } from "../models/User.model.js";
 
 export const teamController = {
   createTeam: async (req, res) => {
@@ -33,9 +34,10 @@ export const teamController = {
 
   assignTeamLead: async (req, res) => {
     try {
-      const { teamId, userId } = req.body;
+      const { id } = req.params;
+      const { userId } = req.body;
 
-      const team = await Team.findById(teamId);
+      const team = await Team.findById(id);
       const user = await User.findById(userId);
 
       if (!team) {
@@ -50,7 +52,7 @@ export const teamController = {
       }
 
       team.teamLead = userId;
-      user.team = teamId;
+      user.team = id;
 
       await team.save();
       await user.save();
@@ -63,7 +65,10 @@ export const teamController = {
 
   getTeams: async (req, res) => {
     try {
-      const teams = await Team.find().populate("teamLead members project");
+      const teams = await Team.find()
+        .populate("teamLead", "username email")
+        .populate("members", "username email")
+        .populate("project");
       res.json(teams);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -72,9 +77,10 @@ export const teamController = {
 
   getTeamById: async (req, res) => {
     try {
-      const team = await Team.findById(req.params.id).populate(
-        "teamLead members project"
-      );
+      const team = await Team.findById(req.params.id)
+        .populate("teamLead", "username email")
+        .populate("members", "username email")
+        .populate("project");
       if (!team) return res.status(404).json({ message: "Team not found" });
       res.json(team);
     } catch (error) {
@@ -89,6 +95,39 @@ export const teamController = {
       });
       if (!team) return res.status(404).json({ message: "Team not found" });
       res.json(team);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  },
+
+  updateTeamLead: async (req, res) => {
+    try {
+      const { id } = req.params;
+      const { userId } = req.body;
+
+      const user = await User.findById(userId);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      if (user.role !== "TEAM_LEAD") {
+        return res.status(400).json({ error: "User must have TEAM_LEAD role" });
+      }
+
+      const team = await Team.findByIdAndUpdate(
+        id,
+        { teamLead: userId },
+        { new: true }
+      ).populate("teamLead", "username email");
+
+      if (!team) {
+        return res.status(404).json({ message: "Team not found" });
+      }
+
+      user.team = id;
+      await user.save();
+
+      res.json({ message: "Team lead updated successfully", team });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
