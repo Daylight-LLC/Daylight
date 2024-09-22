@@ -15,6 +15,12 @@ const userSchema = new mongoose.Schema(
       ref: "Team",
       required: false,
     },
+    assignedIssues: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Issue",
+      },
+    ],
     projects: [
       {
         type: mongoose.Schema.Types.ObjectId,
