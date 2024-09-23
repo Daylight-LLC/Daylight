@@ -10,6 +10,7 @@ import Topbar from "../../components/Topbar";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Add } from "@mui/icons-material";
 import TasksTable from "../../components/TasksTable";
+import TopPerformer from "../../components/TopPerformer";
 
 const Dashboard = () => {
   return (
@@ -86,8 +87,22 @@ const Dashboard = () => {
           <DashboardProjectsTable />
           <ProjectProgress />
         </Box>
-        <Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+          }}
+        >
           <TasksTable />
+          <TopPerformer
+            variant="outlined"
+            height={350}
+            width={"22.5%"}
+            heading={"Top Performers"}
+            header1={"Name"}
+            header2={"Goal %"}
+          />
         </Box>
       </Box>
     </Box>
