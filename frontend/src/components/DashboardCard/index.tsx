@@ -4,15 +4,23 @@ interface CardProps {
   title: string;
   values: string;
   icon: JSX.Element;
+  width: number;
+  height: number;
 }
 
-const DashboardCard: React.FC<CardProps> = ({ title, values, icon }) => {
+const DashboardCard: React.FC<CardProps> = ({
+  title,
+  values,
+  icon,
+  width,
+  height,
+}) => {
   return (
     <Sheet
       variant="outlined"
       sx={{
-        width: 250,
-        height: 100,
+        width: width,
+        height: height,
         p: 2,
         borderRadius: "sm",
         display: "flex",

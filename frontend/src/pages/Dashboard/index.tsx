@@ -58,21 +58,29 @@ const Dashboard = () => {
             title="Projects"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
+            width={0}
+            height={0}
           />
           <DashboardCard
             title="Projects"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
+            width={0}
+            height={0}
           />
           <DashboardCard
             title="Projects"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
+            width={0}
+            height={0}
           />
           <DashboardCard
             title="Projects"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
+            width={0}
+            height={0}
           />
         </Box>
         <Box
@@ -83,7 +91,15 @@ const Dashboard = () => {
           }}
         >
           <DashboardProjectsTable />
-          <ProjectProgress />
+          <ProjectProgress
+            width={0}
+            height={0}
+            value={0}
+            fontSize={0}
+            cardWidth={0}
+            boxShadow={""}
+            variant={""}
+          />
         </Box>
       </Box>
     </Box>
