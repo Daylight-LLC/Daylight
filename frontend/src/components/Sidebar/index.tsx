@@ -19,7 +19,7 @@ import Stack from "@mui/joy/Stack";
 import SearchRoundedIcon from "@mui/icons-material/SearchRounded";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import DashboardRoundedIcon from "@mui/icons-material/DashboardRounded";
-import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import FolderIcon from "@mui/icons-material/Folder";
 import AssignmentRoundedIcon from "@mui/icons-material/AssignmentRounded";
 import QuestionAnswerRoundedIcon from "@mui/icons-material/QuestionAnswerRounded";
 import GroupRoundedIcon from "@mui/icons-material/GroupRounded";
@@ -125,7 +125,7 @@ export default function Sidebar() {
         <IconButton variant="soft" color="primary" size="sm">
           <BrightnessAutoRoundedIcon />
         </IconButton>
-        <Typography level="title-lg">Acme Co.</Typography>
+        <Typography level="title-lg">Daylight</Typography>
         <ColorSchemeToggle sx={{ ml: "auto" }} />
       </Box>
       <Input
@@ -164,7 +164,7 @@ export default function Sidebar() {
 
           <Link to="dashboard">
             <ListItem>
-              <ListItemButton>
+              <ListItemButton selected>
                 <DashboardRoundedIcon />
                 <ListItemContent>
                   <Typography level="title-sm">Dashboard</Typography>
@@ -174,10 +174,10 @@ export default function Sidebar() {
           </Link>
 
           <ListItem>
-            <ListItemButton selected>
-              <ShoppingCartRoundedIcon />
+            <ListItemButton>
+              <FolderIcon />
               <ListItemContent>
-                <Typography level="title-sm">Orders</Typography>
+                <Typography level="title-sm">Projects</Typography>
               </ListItemContent>
             </ListItemButton>
           </ListItem>
@@ -241,7 +241,7 @@ export default function Sidebar() {
                 <ListItemButton onClick={() => setOpen(!open)}>
                   <GroupRoundedIcon />
                   <ListItemContent>
-                    <Typography level="title-sm">Users</Typography>
+                    <Typography level="title-sm">Teams</Typography>
                   </ListItemContent>
                   <KeyboardArrowDownIcon
                     sx={[

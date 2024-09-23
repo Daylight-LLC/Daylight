@@ -24,7 +24,7 @@ const Topbar: React.FC<TopbarProps> = ({
       <Breadcrumbs size="sm" separator="">
         <Link to={path}>{icon}</Link>
         <KeyboardArrowRightRoundedIcon fontSize="small" />
-        <Typography level="body-sm" color="neutral">
+        <Typography level="body-sm" color="primary">
           {title}
         </Typography>
       </Breadcrumbs>
@@ -41,7 +41,7 @@ const Topbar: React.FC<TopbarProps> = ({
           {buttonIcon}
           {buttonText}
         </IconButton>
-        <Tooltip title="Notifications" variant="plain">
+        <Tooltip title="Notifications" variant="solid">
           <IconButton>
             <NotificationsRoundedIcon />
           </IconButton>

@@ -9,13 +9,15 @@ import ProjectProgress from "../../components/ProjectProgress";
 import Topbar from "../../components/Topbar";
 import HomeRoundedIcon from "@mui/icons-material/HomeRounded";
 import { Add } from "@mui/icons-material";
+import TasksTable from "../../components/TasksTable";
+import TopPerformer from "../../components/TopPerformer";
 
 const Dashboard = () => {
   return (
     <Box
       sx={{
-        py: 1.5,
-        px: 3,
+        py: { xs: "0", md: 1.5 },
+        px: { xs: 1.5, md: 3 },
         display: "flex",
         flexDirection: "column",
       }}
@@ -78,12 +80,29 @@ const Dashboard = () => {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "row",
+            flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
           }}
         >
           <DashboardProjectsTable />
           <ProjectProgress />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", md: "row" },
+            justifyContent: "space-between",
+          }}
+        >
+          <TasksTable />
+          <TopPerformer
+            variant="outlined"
+            height={350}
+            width={"22.5%"}
+            heading={"Top Performers"}
+            header1={"Name"}
+            header2={"Goal %"}
+          />
         </Box>
       </Box>
     </Box>

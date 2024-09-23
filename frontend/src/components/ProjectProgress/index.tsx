@@ -1,4 +1,4 @@
-import { Sheet } from "@mui/joy";
+import { Sheet, Typography } from "@mui/joy";
 import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
 
 const settings = {
@@ -12,7 +12,8 @@ export default function ProjectProgress() {
     <Sheet
       variant="outlined"
       sx={{
-        width: 250,
+        width: "15.6rem",
+        height: { xs: "6.25rem", md: "21rem" },
         borderRadius: "sm",
         display: "flex",
         flexDirection: "column",
@@ -21,6 +22,9 @@ export default function ProjectProgress() {
         boxShadow: "sm",
       }}
     >
+      <Typography level="title-lg" py={2}>
+        Progress
+      </Typography>
       <Gauge
         {...settings}
         cornerRadius="50%"
