@@ -19,43 +19,40 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { visuallyHidden } from "@mui/utils";
 
 interface Data {
-  calories: number;
-  carbs: number;
-  fat: number;
-  name: string;
-  protein: number;
+  projectName: string;
+  projectLead: string;
+  dueDate: string;
+  status: string;
+  progress: number;
 }
 
 function createData(
-  name: string,
-  calories: number,
-  fat: number,
-  carbs: number,
-  protein: number
+  projectName: string,
+  projectLead: string,
+  dueDate: string,
+  status: string,
+  progress: number
 ): Data {
   return {
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
+    projectName,
+    projectLead,
+    dueDate,
+    status,
+    progress,
   };
 }
 
 const rows = [
-  createData("Cupcake", 305, 3.7, 67, 4.3),
-  createData("Donut", 452, 25.0, 51, 4.9),
-  createData("Eclair", 262, 16.0, 24, 6.0),
-  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
-  createData("Gingerbread", 356, 16.0, 49, 3.9),
-  createData("Honeycomb", 408, 3.2, 87, 6.5),
-  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
-  createData("Jelly Bean", 375, 0.0, 94, 0.0),
-  createData("KitKat", 518, 26.0, 65, 7.0),
-  createData("Lollipop", 392, 0.2, 98, 0.0),
-  createData("Marshmallow", 318, 0, 81, 2.0),
-  createData("Nougat", 360, 19.0, 9, 37.0),
-  createData("Oreo", 437, 18.0, 63, 4.0),
+  createData("Website Redesign", "Alice Johnson", "2024-10-15", "In Progress", 50),
+  createData("Mobile App Development", "Bob Smith", "2024-11-01", "Completed", 100),
+  createData("SEO Optimization", "Carol Davis", "2024-09-30", "Open", 0),
+  createData("Content Strategy", "David Brown", "2024-10-20", "In Progress", 30),
+  createData("E-commerce Platform", "Eva White", "2024-12-15", "On Hold", 10),
+  createData("Branding Campaign", "Frank Miller", "2024-11-20", "In Progress", 60),
+  createData("Data Analytics", "Grace Lee", "2024-10-10", "Completed", 100),
+  createData("CRM Integration", "Henry Wilson", "2024-11-05", "Open", 0),
+  createData("User Experience Research", "Ivy Martinez", "2024-10-25", "In Progress", 40),
+  createData("Social Media Marketing", "Jack Thompson", "2024-12-01", "On Hold", 20),
 ];
 
 function labelDisplayedRows({
@@ -103,34 +100,34 @@ interface HeadCell {
 
 const headCells: readonly HeadCell[] = [
   {
-    id: "name",
+    id: "projectName",
     numeric: false,
     disablePadding: true,
-    label: "Dessert (100g serving)",
+    label: "Project Name",
   },
   {
-    id: "calories",
-    numeric: true,
+    id: "projectLead",
+    numeric: false,
     disablePadding: false,
-    label: "Calories",
+    label: "Project Lead",
   },
   {
-    id: "fat",
-    numeric: true,
+    id: "dueDate",
+    numeric: false,
     disablePadding: false,
-    label: "Fat (g)",
+    label: "Due Date",
   },
   {
-    id: "carbs",
-    numeric: true,
+    id: "status",
+    numeric: false,
     disablePadding: false,
-    label: "Carbs (g)",
+    label: "Status",
   },
   {
-    id: "protein",
+    id: "progress",
     numeric: true,
     disablePadding: false,
-    label: "Protein (g)",
+    label: "Progress",
   },
 ];
 
@@ -170,7 +167,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
             onChange={onSelectAllClick}
             slotProps={{
               input: {
-                "aria-label": "select all desserts",
+                "aria-label": "select all projects",
               },
             }}
             sx={{ verticalAlign: "sub" }}
@@ -209,7 +206,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                 }
                 sx={{
                   fontWeight: "lg",
-
                   "& svg": {
                     transition: "0.2s",
                     transform:
@@ -217,7 +213,6 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                         ? "rotate(0deg)"
                         : "rotate(180deg)",
                   },
-
                   "&:hover": { "& svg": { opacity: 1 } },
                 }}
               >
@@ -237,9 +232,11 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     </thead>
   );
 }
+
 interface EnhancedTableToolbarProps {
   numSelected: number;
 }
+
 function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
   const { numSelected } = props;
   return (
@@ -270,7 +267,7 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
           id="tableTitle"
           component="div"
         >
-          Nutrition
+          Project Summary
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -289,12 +286,14 @@ function EnhancedTableToolbar(props: EnhancedTableToolbarProps) {
     </Box>
   );
 }
+
 export default function DashboardProjectsTable() {
   const [order, setOrder] = React.useState<Order>("asc");
-  const [orderBy, setOrderBy] = React.useState<keyof Data>("calories");
+  const [orderBy, setOrderBy] = React.useState<keyof Data>("progress");
   const [selected, setSelected] = React.useState<readonly string[]>([]);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(5);
+
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
     property: keyof Data
@@ -303,19 +302,21 @@ export default function DashboardProjectsTable() {
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
+
   const handleSelectAllClick = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
+      const newSelected = rows.map((n) => n.projectName);
       setSelected(newSelected);
       return;
     }
     setSelected([]);
   };
-  const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    const selectedIndex = selected.indexOf(name);
+
+  const handleClick = (event: React.MouseEvent<unknown>, projectName: string) => {
+    const selectedIndex = selected.indexOf(projectName);
     let newSelected: readonly string[] = [];
     if (selectedIndex === -1) {
-      newSelected = newSelected.concat(selected, name);
+      newSelected = newSelected.concat(selected, projectName);
     } else if (selectedIndex === 0) {
       newSelected = newSelected.concat(selected.slice(1));
     } else if (selectedIndex === selected.length - 1) {
@@ -328,13 +329,12 @@ export default function DashboardProjectsTable() {
     }
     setSelected(newSelected);
   };
+
   const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
-  const handleChangeRowsPerPage = (event: any, newValue: number | null) => {
-    setRowsPerPage(parseInt(newValue!.toString(), 10));
-    setPage(0);
-  };
+
+
   const getLabelDisplayedRowsTo = () => {
     if (rows.length === -1) {
       return (page + 1) * rowsPerPage;
@@ -343,9 +343,10 @@ export default function DashboardProjectsTable() {
       ? rows.length
       : Math.min(rows.length, (page + 1) * rowsPerPage);
   };
-  // Avoid a layout jump when reaching the last page with empty rows.
+
   const emptyRows =
     page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+
   return (
     <Sheet
       variant="outlined"
@@ -385,20 +386,19 @@ export default function DashboardProjectsTable() {
             .sort(getComparator(order, orderBy))
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((row, index) => {
-              const isItemSelected = selected.includes(row.name);
+              const isItemSelected = selected.includes(row.projectName);
               const labelId = `enhanced-table-checkbox-${index}`;
 
               return (
                 <tr
-                  onClick={(event) => handleClick(event, row.name)}
+                  onClick={(event) => handleClick(event, row.projectName)}
                   role="checkbox"
                   aria-checked={isItemSelected}
                   tabIndex={-1}
-                  key={row.name}
-                  // selected={isItemSelected}
+                  key={row.projectName}
                   style={
                     isItemSelected
-                      ? ({
+                      ? ( {
                           "--TableCell-dataBackground":
                             "var(--TableCell-selectedBackground)",
                           "--TableCell-headBackground":
@@ -419,12 +419,12 @@ export default function DashboardProjectsTable() {
                     />
                   </th>
                   <th id={labelId} scope="row">
-                    {row.name}
+                    {row.projectName}
                   </th>
-                  <td>{row.calories}</td>
-                  <td>{row.fat}</td>
-                  <td>{row.carbs}</td>
-                  <td>{row.protein}</td>
+                  <td>{row.projectLead}</td>
+                  <td>{row.dueDate}</td>
+                  <td>{row.status}</td>
+                  <td>{row.progress}%</td>
                 </tr>
               );
             })}
@@ -452,17 +452,6 @@ export default function DashboardProjectsTable() {
                   justifyContent: "flex-end",
                 }}
               >
-                <FormControl orientation="horizontal" size="sm">
-                  <FormLabel>Rows per page:</FormLabel>
-                  <Select
-                    onChange={handleChangeRowsPerPage}
-                    value={rowsPerPage}
-                  >
-                    <Option value={5}>5</Option>
-                    <Option value={10}>10</Option>
-                    <Option value={25}>25</Option>
-                  </Select>
-                </FormControl>
                 <Typography sx={{ textAlign: "center", minWidth: 80 }}>
                   {labelDisplayedRows({
                     from: rows.length === 0 ? 0 : page * rowsPerPage + 1,

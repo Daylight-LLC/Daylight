@@ -12,6 +12,7 @@ import { Add } from "@mui/icons-material";
 import TasksTable from "../../components/TasksTable";
 import TopPerformer from "../../components/TopPerformer";
 
+
 const Dashboard = () => {
   return (
     <Box
@@ -62,12 +63,12 @@ const Dashboard = () => {
             icon={<AccountTreeRoundedIcon fontSize="large" />}
           />
           <DashboardCard
-            title="Projects"
+            title="Tasks"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
           />
           <DashboardCard
-            title="Projects"
+            title="Issues"
             values="10/20"
             icon={<AccountTreeRoundedIcon fontSize="large" />}
           />
